@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMC, GEB e GET</title>
+</head>
+<body>
+    <script>
+        /*
+        1 - receber nome, idade, peso(kg), altura(cm), sexo e peso em kg q deseja perder
+        ok
+        2 - efetuar calculos imc, geb e get, quantidade de calorias ideal por dia e quanto tempo pra perder o peso
+             * IMC = peso / (altura * altura)
+             * GEB: ok
+                    Mulher = 655.1 + (9.56 * peso) + (1.85 * altura) - (4.68 * idade) kcal
+                    Homem = 66.47 + (13.75 * peso) + (5 * altura) - (6.76 * idade) kcal
+             * GET: ok
+                                                                                ETA = GEB * 10%
+                                                                                GAF:
+                                                                                    Sedentário = 1.39
+                                                                                    Pouco ativo = 1.59
+                                                                                    Ativo = 1.89
+                                                                                    Muito ativo = 2.5
+
+                                                                                * GET = (geb + eta) * naf
+
+                    * Masculino
+                        * 9 a 18 anos
+                            * NAF
+                                - Sedentário = 1
+                                - Pouco ativo = 1.13
+                                - Ativo = 1.26
+                                - Muito ativo = 1.42
+                            * GET = 88.6 - (61.9 * idade) + (NAF * (15.91 * peso + 934 * altura)) + 25
+                        * +19 anos
+                            * NAF
+                                - Sedentário = 1
+                                - Pouco ativo = 1.11
+                                - Ativo = 1.25
+                                - Muito ativo = 1.48
+                            * GET = 662 - (9.53 * idade) + (NAF * (15.91 * peso + 539.6 * altura))
+
+                    * Feminino
+                        * 9 a 18 anos
+                            * NAF
+                                - Sedentário = 1
+                                - Pouco ativo = 1.16
+                                - Ativo = 1.31
+                                - Muito ativo = 1.56
+                            * GET = 135.3 - (30.8 * idade) + (NAF * (10 * peso + 934 * altura)) + 25
+                        * +19 anos
+                            * NAF
+                                - Sedentário = 1
+                                - Pouco ativo = 1.12
+                                - Ativo = 1.27
+                                - Muito ativo = 1.45
+                            * GET = 354 - (6.91 * idade) + (NAF * (9.36 * peso + 726 * altura))
+             * caloria ideal por dia:
+                    1 kg = 7.700 kcal
+                    7 dias = 1.100 kcal por dia
+                    * GET + 1.100
+             * tempo pra perder o peso = 
+        */
+
+        var pessoa =
+        {
+            nome: prompt("Informe seu nome"),
+            idade: parseInt(prompt("Informe sua idade (somente números)")),
+            peso: parseFloat(prompt("Informe seu peso (kg)")),
+            altura: parseFloat(prompt("Informe sua altura (cm)")),
+            sexo: prompt("Informe seu sexo (m | h)"),
+            NAF: prompt('Informe o seu nível de atividade física: Sedentário ("a") | Pouco ativo ("b") | Ativo ("c") | Muito ativo ("d")'),
+            pesoPerder: parseFloat(prompt("Informe o peso que deseja perder (kg)"))
+        }
+
+
+        var IMC, GEB, GET, calDiaria, tempoPerderPeso, ETA, NAFnum, NAFlabel, sexo;
+        var NAF = pessoa.NAF.toLowerCase();
+        pessoa.sexo = pessoa.sexo.toLowerCase();
+        pessoa.NAF = pessoa.NAF.toLowerCase();
+        switch(pessoa.sexo){
+            case "m":
+                GEB = 66.47 + (13.75 * pessoa.peso) + (5 * pessoa.altura) - (6.76 * pessoa.idade); //kcal
+                sexo = "Mulher";
+                if(pessoa.idade >= 9 && pessoa.idade <= 18){
+                    switch (NAF) {
+                        case "a":
+                            NAFnum = 1;
+                            NAFlabel = "Sedentário";
+                            break;
+                        case "b":
+                            NAFnum = 1.16;
+                            NAFlabel = "Pouco ativo";
+                            break;
+                        case "c":
+                            NAFnum = 1.31;
+                            NAFlabel = "Ativo";
+                            break;
+                        case "d":
+                            NAFnum = 1.56;
+                            NAFlabel = "Muito ativo";
+                            break;
+                        default:
+                            alert('Você não escolheu um nível de atividade física válido');
+                            break;
+                    }
+                    GET = 135.3 - (30.8 * pessoa.idade) + (NAFnum * (10 * pessoa.peso + 934 * pessoa.altura)) + 25;
+                } else if(pessoa.idade > 18){
+                    switch (NAF) {
+                        case "a":
+                            NAFnum = 1;
+                            NAFlabel = "Sedentário";
+                            break;
+                        case "b":
+                            NAFnum = 1.12;
+                            NAFlabel = "Pouco ativo";
+                            break;
+                        case "c":
+                            NAFnum = 1.27;
+                            NAFlabel = "Ativo";
+                            break;
+                        case "d":
+                            NAFnum = 1.45;
+                            NAFlabel = "Muito ativo";
+                            break;
+                        default:
+                            alert('Você não escolheu um nível de atividade física válido');
+                            break;
+                    }
+                    GET = 354 - (6.91 * pessoa.idade) + (NAFnum * (9.36 * pessoa.peso + 726 * pessoa.altura));
+                } else{
+                    alert('Este cálculo só funciona com pessoas que tem 9 anos ou mais');
+                }
+                
+                break;
+            case "h":
+                GEB = 66.47 + (13.75 * pessoa.peso) + (5 * pessoa.altura) - (6.76 * pessoa.idade);
+                sexo = "Homem";
+                if(pessoa.idade >= 9 && pessoa.idade <= 18){
+                    switch (NAF) {
+                        case "a":
+                            NAFnum = 1;
+                            break;
+                        case "b":
+                            NAFnum = 1.13;
+                            break;
+                        case "c":
+                            NAFnum = 1.26;
+                            break;
+                        case "d":
+                            NAFnum = 1.42;
+                            break;
+                        default:
+                            alert('Você não escolheu um nível de atividade física válido');
+                            break;
+                    }
+                    GET = 88.6 - (61.9 * pessoa.idade) + (NAFnum * (15.91 * pessoa.peso + 934 * pessoa.altura)) + 25;
+                } else if(pessoa.idade > 18){
+                    switch (NAF) {
+                        case "a":
+                            NAFnum = 1;
+                            break;
+                        case "b":
+                            NAFnum = 1.11;
+                            break;
+                        case "c":
+                            NAFnum = 1.25;
+                            break;
+                        case "d":
+                            NAFnum = 1.48;
+                            break;
+                        default:
+                            alert('Você não escolheu um nível de atividade física válido');
+                            break;
+                    }
+                    GET = 662 - (9.53 * pessoa.idade) + (NAFnum * (15.91 * pessoa.peso + 539.6 * pessoa.altura));
+                } else{
+                    alert('Este cálculo só funciona com pessoas que tem 9 anos ou mais');
+                }
+                break;
+            default:
+                alert('Você não colocou um sexo válido. Informe "m" para mulher e "h" para homem');
+                break;
+        }
+        ETA = GEB * 0.1;
+        //GET = (GEB + ETA) * NAFnum;
+        calDiaria = GET - 1100;
+        //pessoa.peso = pessoa.peso / 100;
+        IMC = pessoa.peso / (pessoa.altura * pessoa.altura);
+        tempoPerderPeso = pessoa.pesoPerder * 7;
+
+        document.write(`<h2>
+            Nome: ${pessoa.nome}<br>
+            Idade: ${pessoa.idade}<br>
+            Peso: ${pessoa.peso.toFixed(1)}<br>
+            Altura: ${pessoa.altura.toFixed(2)}<br>
+            Sexo: ${sexo}<br>
+            Nível de atividade física: ${NAFlabel}<br>
+            Peso que deseja perder: ${pessoa.pesoPerder.toFixed(1)}<br>
+            <br>
+            Índice de massa corporal: ${IMC.toFixed(2)}<br>
+            Gasto energético basal: ${GEB.toFixed(2)}<br>
+            Gasto energético total: ${GET.toFixed(2)}<br>
+            Quantidade de calorias ideal por dia: ${calDiaria.toFixed(2)}<br>
+            Tempo que levaria pra perder a quantidade de peso desejada: ${tempoPerderPeso}
+            </h2>`);
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nutrição</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <header>
+        <ul>
+            <li>
+                <p><a href="https://blog.dietbox.me/como-calcular-o-gasto-energetico-total-get/" target="_blank">Gasto
+                        energético total</a></p>
+            </li>
+            <li>
+                <p><a href="https://www.elhombre.com.br/quantas-calorias-tem-1-kg/" target="_blank">Quantas calorias tem
+                        1kg</a>
+                </p>
+            </li>
+            <li>
+                <p><a href="https://blog.dietbox.me/como-calcular-o-gasto-energetico/" target="_blank">Gasto
+                        energético</a></p>
+            </li>
+        </ul>
+    </header>
+
+    <main id="fundo">
+        <div id="conteudo">
+            <h3 style="text-align: justify; margin-bottom: 10px;">Crie um sistema que receba as informações necessárias do usuário como: nome, idade, peso, altura, sexo e
+                quantidade de peso em Kg que deseja perder. O sistema deve calcular todos os fatores e mostrar para o
+                usuário informações importantes como IMC, GEB e GET, quantidade de calorias ideal por dia e quanto tempo
+                ele levaria para perder a quantidade de peso que informou.</h3>
+            <p>
+                Area de calculos: <br>
+                Grau de atividade fisica Valores de GAF <br>
+                Sedentário 1 a 1,39 // média:  <br>
+                Pouco ativo 1,4 a 1,59 <br>
+                Ativo 1,6 a 1,89 <br>
+                Muito Ativo 1,9 a 2,5 <br><br>
+            </p>
+
+            <!-- 
+
+                1 a 2,5
+
+                1,5 / 5 = 
+
+                0,3
+
+                1 a 1,3    :1
+
+                1,3 a 1,6  :2
+ 
+                1,6 a 1,9  :3
+
+                1,9 a 2,2  :4
+
+                2,2 a 2,5  :5
+
+             -->
+
+            <p id="resposta"></p>
+
+            <button onclick="calcular()">calcular</button>
+
+        </div>
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
