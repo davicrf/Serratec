@@ -45,7 +45,6 @@ const gaf = [
 //FUNÇÃO PARA CALCULA VALORES
 
 function calcular() {
-
     // VARIAVEIS -- PEGAR INFORMAÇÕES E VALIDAR
 
     let nome = prompt("Digite seu nome");
@@ -55,17 +54,29 @@ function calcular() {
     }
 
     /* 
-        Parâmetros da função:
-        1) "X" --> Valor digitado pelo usuário
-        2) "Y" --> Função de conversão para número inteiro ou real
-        3) "Z" --> Pergunta que deverá realizar ao usuário.
-    */
+          Parâmetros da função:
+          1) "X" --> Valor digitado pelo usuário
+          2) "Y" --> Função de conversão para número inteiro ou real
+          3) "Z" --> Pergunta que deverá realizar ao usuário.
+      */
 
-    let idade = validarNumero(parseInt(prompt("Informe sua idade")), parseInt, "Por favor, informe sua idade");
+    let idade = validarNumero(
+        parseInt(prompt("Informe sua idade")),
+        parseInt,
+        "Por favor, informe sua idade"
+    );
 
-    let peso = validarNumero(parseFloat(prompt("Informe seu peso em kilos(KG)")), parseFloat, "Por favor, informe seu peso em kilos(KG)");
+    let peso = validarNumero(
+        parseFloat(prompt("Informe seu peso em kilos(KG)")),
+        parseFloat,
+        "Por favor, informe seu peso em kilos(KG)"
+    );
 
-    let altura = validarNumero(parseFloat(prompt("Informe sua altura em metros(m)")), parseFloat, "Por favor, informe sua altura em metros(m)");
+    let altura = validarNumero(
+        parseFloat(prompt("Informe sua altura em metros(m)")),
+        parseFloat,
+        "Por favor, informe sua altura em metros(m)"
+    );
 
     let emagrecimento = parseFloat(
         prompt("Informe quantos quilos pretende emagrecer: ")
@@ -85,42 +96,49 @@ function calcular() {
     }
 
     /* 
-        Parâmetros da função:
-        1) "X" --> Sexo digitado pelo usuário
-        2) "Y" --> Valor booleano para validação
-    */
+          Parâmetros da função:
+          1) "X" --> Sexo digitado pelo usuário
+          2) "Y" --> Valor booleano para validação
+      */
 
-    let sexo = validarSexo(prompt("Informe seu sexo: \n Digite \"M\" para masculino \n Digite \"F\" para feminino").toLowerCase(), true);
+    let sexo = validarSexo(
+        prompt(
+            'Informe seu sexo: \n Digite "M" para masculino \n Digite "F" para feminino'
+        ).toLowerCase(),
+        true
+    );
 
     function validarSexo(x, z) {
         while (z) {
             if (x == "m" || x == "f") {
-                z = false
+                z = false;
             } else {
-                x = prompt("Por favor, informe seu sexo: \n Digite \"M\" para masculino \n Digite \"F\" para feminino").toLowerCase();
+                x = prompt(
+                    'Por favor, informe seu sexo: \n Digite "M" para masculino \n Digite "F" para feminino'
+                ).toLowerCase();
+            }
+        }
+        return x;
+    }
+
+    let nivelAtividade = validarNivel(
+        parseInt(
+            prompt(
+                "Digite de 1 a 5 o quão ativo você é, sendo: 1 =  a sendatario e 5 muito ativo"
+            )
+        ),
+        true
+    );
+
+    function validarNivel(x, y) {
+        while (y) {
+            if (!isNaN(x) && x >= 1 && x <= 5) {
+                y = false
+            } else {
+                x = parseInt(prompt("Digite de 1 a 5 o quão ativo você é, sendo: 1 =  a sendatario e 5 muito ativo"))
             }
         }
         return x
-    }
-
-    let nivelAtividade = parseInt(
-        prompt(
-            "Digite de 1 a 5 o quão ativo você é, sendo: 1 =  a sendatario e 5 muito ativo"
-        )
-    );
-    let valorNivelAtividade = true;
-
-    while (valorNivelAtividade == true) {
-        if (!isNaN(nivelAtividade) && nivelAtividade >= 1 && nivelAtividade <= 5) {
-            valorNivelAtividade = false;
-        } else {
-            nivelAtividade = parseInt(
-                prompt(
-                    "Digite de 1 a 5 o quão ativo você é, sendo: 1 =  a sendatario e 5 muito ativo"
-                )
-            );
-            valorNivelAtividade = true;
-        }
     }
 
     // VARIAVES COM VALOR DOS CALCULOS + CALCULOS E CONDIÇÕES
@@ -226,15 +244,17 @@ function calcular() {
     if (sexo == "m") {
         document.getElementById("resposta").innerHTML = `
                 <p>Olá, ${nome}!<br>
-                O seu IMC é: ${imc.toFixed(2).replace(".",",")} <br>
-                O seu Peso ideal é: ${pesoIdeal.toFixed(2).replace(".",",")} kg<br>
+                O seu IMC é: ${imc.toFixed(2).replace(".", ",")} <br>
+                O seu Peso ideal é: ${pesoIdeal
+                .toFixed(2)
+                .replace(".", ",")} kg<br>
                 O seu GEB é: ${gebHomem.toFixed(0)}<br>
                 você terá que gastar ${caloriaTotal} calorias para perder os ${emagrecimento.toFixed(
-            2
-        )} kg<br>
+                    2
+                )} kg<br>
                 Seu gasto calórico diário é igual a ${parseInt(
-            get
-        )} calorias por dia<br>
+                    get
+                )} calorias por dia<br>
                 ${_1KgPorSemana} <br>
                 </p>
             `;
