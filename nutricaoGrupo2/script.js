@@ -103,8 +103,6 @@ function calcular() {
         return x
     }
 
-    
-
     let nivelAtividade = parseInt(
         prompt(
             "Digite de 1 a 5 o quão ativo você é, sendo: 1 =  a sendatario e 5 muito ativo"
